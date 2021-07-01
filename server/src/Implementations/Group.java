@@ -1,11 +1,12 @@
 package Implementations;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Group {
-    private ArrayList<UserThread> users;
+    private Set<UserThread> users = new HashSet<>();
 
-    public ArrayList<UserThread> getUsers() {
+    public Set<UserThread> getUsers() {
         return users;
     }
 }
