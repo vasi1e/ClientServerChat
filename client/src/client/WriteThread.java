@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class WriteThread extends Thread {
     private PrintWriter writer;
@@ -25,30 +26,32 @@ public class WriteThread extends Thread {
     }
 
     public void run() {
+        Scanner scanner = new Scanner(System.in);
 
-        Console console = System.console();
-
-        String userName = console.readLine("\nEnter your name: ");
+        System.out.println("\nEnter your name: ");
+        String userName = scanner.next();
         client.setUserName(userName);
         writer.println(userName);
 
         String command;
         do {
-            command = console.readLine("\nChoose action by writing:\n" +
+            System.out.print("\nChoose action by writing:\n" +
                     "1) \"chat\" for creating a chat\n" +
                     "2) \"group\" for creating a group\n" +
                     "3) \"quit\" for quiting the server\n");
+            command = scanner.next();
             writer.println(command);
 
             if(command.equals("chat")) {
-                String otherUserName = console.readLine("\nEnter name of the person you want to chat: ");
+                System.out.println("\nEnter name of the person you want to chat: ");
+                String otherUserName = scanner.next();
                 writer.println(otherUserName);
             }
 
             String text;
             do {
-                text = console.readLine("[" + userName + "]: ");
-                writer.println(text);
+                text = scanner.next();
+                writer.println("[" + userName + "]: " + text);
 
             } while (!text.equals("bye"));
         } while (!command.equals("quit"));

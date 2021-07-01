@@ -39,6 +39,7 @@ public class UserThread extends Thread{
                     Chat chat = server.findChat(userName, otherUserName);
                     if(chat == null) {
                         chat = new Chat(this, getUserWithName(otherUserName));
+                        server.addChat(chat);
                     }
 
                     do {
