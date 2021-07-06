@@ -28,7 +28,7 @@ public class WriteThread extends Thread {
     public void run() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\nEnter your name: ");
+        System.out.print("\nEnter your name: ");
         String userName = scanner.next();
         client.setUserName(userName);
         writer.println(userName);
@@ -43,16 +43,15 @@ public class WriteThread extends Thread {
             writer.println(command);
 
             if(command.equals("chat")) {
-                System.out.println("\nEnter name of the person you want to chat: ");
+                System.out.print("\nEnter name of the person you want to chat: ");
                 String otherUserName = scanner.next();
                 writer.println(otherUserName);
             }
 
             String text;
             do {
-                text = scanner.next();
+                text = scanner.nextLine();
                 writer.println("[" + userName + "]: " + text);
-
             } while (!text.equals("bye"));
         } while (!command.equals("quit"));
 

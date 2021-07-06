@@ -32,6 +32,7 @@ public class UserThread extends Thread{
             String option;
             do {
                 String clientMessage;
+
                 option = reader.readLine();
                 if (option.equals("chat")) {
                     String otherUserName = reader.readLine();
@@ -45,8 +46,9 @@ public class UserThread extends Thread{
                     do {
                         clientMessage = reader.readLine();
                         server.messageInChat(chat, clientMessage, this);
-                    } while (!clientMessage.equals("bye"));
+                    } while (!clientMessage.equals("[" + userName + "]: bye"));
 
+                    printUsers();
                 } else if (option.equals("group")) {
 
                 }
