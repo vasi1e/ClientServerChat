@@ -8,9 +8,11 @@ The project is for server-client chat application
 
 We have Server part, which redirects messages from one user to another. The Client part is for reading and writing to the server
 
-### Server: Keeps data for online users, chats and groups. Controlls one Thread (UserThread), which reads the text that the client has send and tell the server to send that text to another user.
+### Server: 
+Keeps data for online users, chats and groups. Controlls one Thread (UserThread), which reads the text that the client has send and tell the server to send that text to another user.
 
-### Client: Controlls two Threads for reading and writing
+### Client: 
+Controlls two Threads for reading and writing
 
 ## How to start this project?
 
