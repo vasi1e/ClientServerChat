@@ -11,12 +11,12 @@ public class ChatServer implements ChatServerInterface {
     private int port;
     private Map<String, UserThread> users= new HashMap();
     private Set<Chat> chats = new HashSet<>();
+    private Set<Group> groups = new HashSet<>();
 
     public ChatServer(int port) {
         this.port = port;
     }
 
-    @Override
     public void execute() {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
 
@@ -54,6 +54,7 @@ public class ChatServer implements ChatServerInterface {
         }
     }
 
+    @Override
     public void broadcast(String message, UserThread excludeUser) {
         for (UserThread aUser : users.values()) {
             if (aUser != excludeUser) {
@@ -79,12 +80,25 @@ public class ChatServer implements ChatServerInterface {
                 .findFirst().orElse(null);
     }
 
+    public Group findGroup(String [] userNames) {
+        Set<UserThread> userThreads = new HashSet<>();
+        Arrays.stream(userNames).forEach(name -> userThreads.add(findUserByName(name)));
+
+        return groups.stream().filter(group -> group.getUsers().containsAll(userThreads) &&
+                                                userThreads.containsAll(group.getUsers()))
+                .findFirst().orElse(null);
+    }
+
     public void addUser(String userName, UserThread aUser) {
         users.put(userName, aUser);
     }
 
     public void addChat(Chat chat) {
         chats.add(chat);
+    }
+
+    public void addGroup(Group group) {
+        groups.add(group);
     }
 
     public void removeUser(String userName) {

@@ -46,13 +46,19 @@ public class WriteThread extends Thread {
                 System.out.print("\nEnter name of the person you want to chat: ");
                 String otherUserName = scanner.next();
                 writer.println(otherUserName);
+            } else if (command.equals("group")) {
+                System.out.print("\nEnter names of the people you want to chat(separated by comma): ");
+                String otherUserNames = scanner.next();
+                writer.println(otherUserNames);
             }
 
-            String text;
-            do {
-                text = scanner.nextLine();
-                writer.println("[" + userName + "]: " + text);
-            } while (!text.equals("bye"));
+            if(!command.equals("quit")) {
+                String text;
+                do {
+                    text = scanner.nextLine();
+                    writer.println("[" + userName + "]: " + text);
+                } while (!text.equals("bye"));
+            }
         } while (!command.equals("quit"));
 
         try {

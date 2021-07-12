@@ -2,6 +2,9 @@ package Implementations;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserThread extends Thread{
     private Socket socket;
@@ -50,7 +53,21 @@ public class UserThread extends Thread{
 
                     printUsers();
                 } else if (option.equals("group")) {
+                    String otherUserNames = reader.readLine();
+                    otherUserNames += "," + userName;
 
+                    Group group = server.findGroup(otherUserNames.split(","));
+                    if(group == null) {
+                        group = new Group(getUsersWithNames(otherUserNames.split(",")));
+                        server.addGroup(group);
+                    }
+
+                    do {
+                        clientMessage = reader.readLine();
+                        server.messageInGroup(group, clientMessage, this);
+                    } while (!clientMessage.equals("[" + userName + "]: bye"));
+
+                    printUsers();
                 }
             } while(!option.equals("quit"));
 
@@ -76,6 +93,10 @@ public class UserThread extends Thread{
 
     private UserThread getUserWithName(String userName) {
         return server.findUserByName(userName);
+    }
+
+    private Set<UserThread> getUsersWithNames(String [] userNames) {
+        return Arrays.stream(userNames).map(name -> server.findUserByName(name)).collect(Collectors.toSet());
     }
 
     public void sendMessage(String message) {
