@@ -20,7 +20,7 @@ You need to run files server/src/Implimentations/ChatServer.java(with port as ar
 
 ## How to use it?
 
-After starting as Client you will be asked for name and action you want to take. For now only "chat" mode is available. Now you will be asked with whom you want to start chat (only online people, the server will crash otherwise). You can chat with them! When you're in the chat the server will continue to send you messages from it or from another person, but to replay to them you will have to leave the current chat and start one with the person who texted you. To leave you need to text bye. To leave the server you need to write quit when asked for action.
+After starting as Client you will be asked for name and action you want to take. Now you will be asked with whom you want to start chat or group (only online people, the server will crash otherwise). You can chat with them! When you're in the chat the server will continue to send you messages from it or from another person, but to replay to them you will have to leave the current chat and start one with the person who texted you. To leave you need to text bye. To leave the server you need to write quit when asked for action.
 
 ## Future ideas
  
